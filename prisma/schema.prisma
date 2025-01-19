@@ -19,5 +19,5 @@ model Task {
   title          String 
   description    String?
   status         String
-  createdAt      String
+  createdAt      DateTime @default(now())
 }

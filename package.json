@@ -16,7 +16,9 @@
       "@prisma/client": "^6.2.1",
       "dotenv": "^16.4.7",
       "express": "^4.21.2",
-      "mongodb": "^5.2.0"
+      "mongodb": "^5.2.0",
+      "swagger-ui": "^5.18.2",
+      "swagger-ui-express": "^5.0.1"
    },
    "devDependencies": {
       "@types/express": "^5.0.0",

@@ -1,0 +1,14 @@
+
+
+
+
+POST https://legendary-acorn-v6v665jrq6gqhx699-3000.app.github.dev/task
+content-type: application/json
+
+{
+        "title": "First Task",
+        "description": "Test of create task",
+        "status": "PENDING"
+
+}
+

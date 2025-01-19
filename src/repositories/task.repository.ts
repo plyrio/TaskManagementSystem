@@ -2,7 +2,7 @@ import {prismaService} from "../db/prisma.service";
 
 class TaskRepository {
   async create(data: any) {
-    return await prismaService.task.create({data});
+    return await prismaService.task.create(data);
   }
 
   async getAll() {

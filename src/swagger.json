@@ -1,0 +1,108 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Task API",
+        "version": "1.0.0",
+        "description": "API para gerenciar tarefas"
+    },
+    "servers": [
+        {
+            "url": "https://legendary-acorn-v6v665jrq6gqhx699-3000.app.github.dev/",
+            "description": "Servidor local"
+        }
+    ],
+    "paths": {
+        "/task": {
+            "get": {
+                "summary": "Retorna todas as tarefas",
+                "description": "Este endpoint retorna uma lista de todas as tarefas.",
+                "responses": {
+                    "200": {
+                        "description": "Lista de tarefas",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "id": 1,
+                                        "title": "Tarefa 1",
+                                        "description": "Descrição da tarefa 1",
+                                        "status": "pendente",
+                                        "createdAt": "2025-01-19T10:00:00Z"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "title": "Tarefa 2",
+                                        "description": "Descrição da tarefa 2",
+                                        "status": "concluída",
+                                        "createdAt": "2025-01-18T10:00:00Z"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Cria uma nova tarefa",
+                "description": "Este endpoint cria uma nova tarefa.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "description": "Título da tarefa"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "description": "Descrição detalhada da tarefa"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "enum": [
+                                            "pendente",
+                                            "em progresso",
+                                            "concluída"
+                                        ],
+                                        "description": "Status da tarefa"
+                                    }
+                                },
+                                "required": [
+                                    "title",
+                                    "status"
+                                ]
+                            },
+                            "example": {
+                                "title": "Nova Tarefa",
+                                "description": "Descrição da nova tarefa",
+                                "status": "pendente"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tarefa criada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 3,
+                                    "title": "Nova Tarefa",
+                                    "description": "Descrição da nova tarefa",
+                                    "status": "pendente",
+                                    "createdAt": "2025-01-19T12:00:00Z"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Requisição inválida"
+                    }
+                }
+            }
+        }
+    }
+}
