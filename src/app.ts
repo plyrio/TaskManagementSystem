@@ -1,25 +1,24 @@
 import express, {Request, Response} from "express";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger.json";
 import TaskRouter from "./routes/task.route";
-const app = express();
-const port = process.env.PORT || 3001;
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./swagger.json");
 import {TaskService} from "./services/task.service";
 import {TaskRepository} from "./repositories/task.repository";
+import TaskController from "./controllers/task.controller";
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const app = express();
+const port = process.env.PORT || 3001;
 
 const taskRepository = new TaskRepository();
 const taskService = new TaskService(taskRepository);
+const taskController = new TaskController(taskService);
 
-app.use(
-  express.urlencoded({
-    extended: true
-  })
-);
+app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-app.use("/task", TaskRouter);
+app.use("/task", TaskRouter(taskController));
 
 app.get("/", (req: Request, res: Response) => {
   res.json({message: "API Rest de Gerenciamento de Tarefas!"});
