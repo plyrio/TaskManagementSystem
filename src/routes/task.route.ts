@@ -6,5 +6,6 @@ const router = Router();
 export default (taskController: TaskController) => {
   router.post("/", taskController.createTask.bind(taskController));
   router.get("/", taskController.getAllTasks.bind(taskController));
+  router.get("/:id", taskController.getTaskById.bind(taskController));
   return router;
 };

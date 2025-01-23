@@ -1,5 +1,5 @@
 {
-   "name": "projeto-1",
+   "name": "TaskManagementSystem",
    "version": "1.0.0",
    "main": "index.js",
    "scripts": {
@@ -9,9 +9,9 @@
       "start": "ts-node src/server.ts"
    },
    "keywords": [],
-   "author": "",
-   "license": "ISC",
-   "description": "",
+   "author": "Pedro Lyrio (Plyrio Dev)",
+   "license": "MIT",
+   "description": "This is a system to management task with basics services",
    "dependencies": {
       "@prisma/client": "^6.2.1",
       "dotenv": "^16.4.7",

@@ -102,7 +102,35 @@
                         "description": "Requisição inválida"
                     }
                 }
+            },
+        },
+           "/task/:id": {
+            "get": {
+                "summary": "Retorna uma tarefa por id",
+                "description": "Este endpoint retorna a tarefa.",
+                "responses": {
+                    "200": {
+                        "description": "Lista de tarefas",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "id": 1,
+                                        "title": "Tarefa 1",
+                                        "description": "Descrição da tarefa 1",
+                                        "completed": false,
+                                        "createdAt": "2025-01-19T10:00:00Z",
+                                        "updatedAt": "2025-01-19T10:00:00Z"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            
+                }
+           }
             }
-        }
+        
     }
-}
+
