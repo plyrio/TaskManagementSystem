@@ -1,16 +1,15 @@
 import {Request, Response} from "express";
-import TaskService from "../services/task.service";
+import {ITaskService} from "../interfaces/task.service.interface";
 
-class TaskController {
+export default class TaskController {
+  constructor(private readonly taskService: ITaskService) {}
   async createTask(req: Request, res: Response): Promise<any> {
-    const task = await TaskService.create(req.body);
+    const task = await this.taskService.createTask(req.body);
     return res.status(201).json(task);
   }
 
   async getAllTasks(req: Request, res: Response): Promise<any> {
-    const tasks = await TaskService.getAll();
+    const tasks = await this.taskService.getAllTasks();
     return res.json(tasks);
   }
 }
-
-export default new TaskController();

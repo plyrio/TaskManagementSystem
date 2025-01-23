@@ -1,13 +1,35 @@
-import {prismaService} from "../db/prisma.service";
+import {prisma} from "../db/prisma.service";
+import {ITaskRepository} from "../interfaces/task.repository.interface";
+import {Task} from "../models/task.model";
 
-class TaskRepository {
-  async create(data: any) {
-    return await prismaService.task.create(data);
+export class TaskRepository implements ITaskRepository {
+  async create(task): Promise<Task> {
+    return await prisma.task.create({
+      data: task
+    });
   }
 
-  async getAll() {
-    return await prismaService.task.findMany({});
+  async findAll(): Promise<Task[]> {
+    return await prisma.task.findMany();
+  }
+
+  async findById(id: string): Promise<Task | null> {
+    return await prisma.task.findUnique({
+      where: {id}
+    });
+  }
+
+  async update(id: string, task: Partial<Task>): Promise<Task | null> {
+    return await prisma.task.update({
+      where: {id},
+      data: task
+    });
+  }
+
+  async delete(id: string): Promise<boolean> {
+    const deletedTask = await prisma.task.delete({
+      where: {id}
+    });
+    return deletedTask ? true : false;
   }
 }
-
-export default new TaskRepository();
