@@ -14,7 +14,7 @@ export default class TaskController {
   }
 
   async getTaskById(req: Request, res: Response): Promise<any> {
-    const {id: string} = req.body;
+    const {id} = req.params;
     const task = await this.taskService.getTaskById(id);
     return res.json(task)
   }

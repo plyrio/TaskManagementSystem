@@ -3,17 +3,15 @@ import {ITaskRepository} from "../interfaces/task.repository.interface";
 import {Task} from "../models/task.model";
 
 export class TaskRepository implements ITaskRepository {
-  async create(task, message): Promise<Task> {
+  async create(task): Promise<Task> {
     try {
       const taskCreate = await prisma.task.create({
       data: task
     });
+    return taskCreate
     } catch (error) {
-      throw new Error(error, "Failed to create task");
-      
-      
+      throw new Error("Failed to create task");
     }
-    return {message: `Task created successfuly. ${taskCreate.title}`}
   }
 
   async findAll(): Promise<Task[]> {

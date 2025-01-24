@@ -1,136 +1,234 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Task API",
-        "version": "1.0.0",
-        "description": "API para gerenciar tarefas"
+      "title": "Task API",
+      "version": "1.0.0",
+      "description": "API to manage tasks"
     },
     "servers": [
-        {
-            "url": "https://legendary-acorn-v6v665jrq6gqhx699-3000.app.github.dev/",
-            "description": "Servidor local"
-        }
+      {
+        "url": "https://legendary-acorn-v6v665jrq6gqhx699-3001.app.github.dev/",
+        "description": "Local server"
+      }
     ],
     "paths": {
-        "/task": {
-            "get": {
-                "summary": "Retorna todas as tarefas",
-                "description": "Este endpoint retorna uma lista de todas as tarefas.",
-                "responses": {
-                    "200": {
-                        "description": "Lista de tarefas",
-                        "content": {
-                            "application/json": {
-                                "example": [
-                                    {
-                                        "id": 1,
-                                        "title": "Tarefa 1",
-                                        "description": "Descrição da tarefa 1",
-                                        "status": "pendente",
-                                        "createdAt": "2025-01-19T10:00:00Z"
-                                    },
-                                    {
-                                        "id": 2,
-                                        "title": "Tarefa 2",
-                                        "description": "Descrição da tarefa 2",
-                                        "status": "concluída",
-                                        "createdAt": "2025-01-18T10:00:00Z"
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "summary": "Cria uma nova tarefa",
-                "description": "Este endpoint cria uma nova tarefa.",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "title": {
-                                        "type": "string",
-                                        "description": "Título da tarefa"
-                                    },
-                                    "description": {
-                                        "type": "string",
-                                        "description": "Descrição detalhada da tarefa"
-                                    },
-                                    "status": {
-                                        "type": "string",
-                                        "enum": [
-                                            "pendente",
-                                            "em progresso",
-                                            "concluída"
-                                        ],
-                                        "description": "Status da tarefa"
-                                    }
-                                },
-                                "required": [
-                                    "title",
-                                    "status"
-                                ]
-                            },
-                            "example": {
-                                "title": "Nova Tarefa",
-                                "description": "Descrição da nova tarefa",
-                                "status": "pendente"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Tarefa criada com sucesso",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "id": 3,
-                                    "title": "Nova Tarefa",
-                                    "description": "Descrição da nova tarefa",
-                                    "status": "pendente",
-                                    "createdAt": "2025-01-19T12:00:00Z"
-                                }
-                            }
-                        }
+      "/task": {
+        "get": {
+          "summary": "Get all tasks",
+          "description": "This endpoint retrieves a list of all tasks.",
+          "responses": {
+            "200": {
+              "description": "List of tasks",
+              "content": {
+                "application/json": {
+                  "example": [
+                    {
+                      "id": "1",
+                      "title": "Task 1",
+                      "description": "Description of task 1",
+                      "completed": false,
+                      "createdAt": "2025-01-19T10:00:00Z",
+                      "updatedAt": "2025-01-19T10:00:00Z"
                     },
-                    "400": {
-                        "description": "Requisição inválida"
+                    {
+                      "id": "2",
+                      "title": "Task 2",
+                      "description": "Description of task 2",
+                      "completed": true,
+                      "createdAt": "2025-01-18T10:00:00Z",
+                      "updatedAt": "2025-01-18T10:30:00Z"
                     }
+                  ]
                 }
-            },
-        },
-           "/task/:id": {
-            "get": {
-                "summary": "Retorna uma tarefa por id",
-                "description": "Este endpoint retorna a tarefa.",
-                "responses": {
-                    "200": {
-                        "description": "Lista de tarefas",
-                        "content": {
-                            "application/json": {
-                                "example": [
-                                    {
-                                        "id": 1,
-                                        "title": "Tarefa 1",
-                                        "description": "Descrição da tarefa 1",
-                                        "completed": false,
-                                        "createdAt": "2025-01-19T10:00:00Z",
-                                        "updatedAt": "2025-01-19T10:00:00Z"
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                }
-            
-                }
-           }
+              }
             }
-        
+          }
+        },
+        "post": {
+          "summary": "Create a new task",
+          "description": "This endpoint creates a new task.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "description": "Task title"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Detailed description of the task"
+                    },
+                    "completed": {
+                      "type": "boolean",
+                      "description": "Indicates whether the task is completed"
+                    }
+                  },
+                  "required": ["title"]
+                },
+                "example": {
+                  "title": "New Task",
+                  "description": "Description of the new task",
+                  "completed": false
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Task created successfully",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "id": "3",
+                    "title": "New Task",
+                    "description": "Description of the new task",
+                    "completed": false,
+                    "createdAt": "2025-01-19T12:00:00Z",
+                    "updatedAt": "2025-01-19T12:00:00Z"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid request"
+            }
+          }
+        }
+      },
+      "/task/{id}": {
+        "get": {
+          "summary": "Get a task by ID",
+          "description": "This endpoint retrieves the details of a specific task.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID of the task to retrieve",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Task details",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "id": "1",
+                    "title": "Task 1",
+                    "description": "Description of task 1",
+                    "completed": false,
+                    "createdAt": "2025-01-19T10:00:00Z",
+                    "updatedAt": "2025-01-19T10:00:00Z"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Task not found"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update a task by ID",
+          "description": "This endpoint updates the details of a specific task.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID of the task to update",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "description": "Task title"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Detailed description of the task"
+                    },
+                    "completed": {
+                      "type": "boolean",
+                      "description": "Indicates whether the task is completed"
+                    }
+                  }
+                },
+                "example": {
+                  "title": "Updated Task",
+                  "description": "Updated description",
+                  "completed": true
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Task updated successfully",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "id": "1",
+                    "title": "Updated Task",
+                    "description": "Updated description",
+                    "completed": true,
+                    "createdAt": "2025-01-19T10:00:00Z",
+                    "updatedAt": "2025-01-19T14:00:00Z"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Task not found"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a task by ID",
+          "description": "This endpoint deletes a specific task.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID of the task to delete",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Task deleted successfully",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "message": "Task deleted successfully"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Task not found"
+            }
+          }
+        }
+      }
     }
-
+  }
