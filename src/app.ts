@@ -1,27 +1,41 @@
-import express, {Request, Response} from "express";
+import express from "express";
 import swaggerUi from "swagger-ui-express";
-import swaggerDocument from "./swagger.json";
+import swaggerJSDoc from "swagger-jsdoc";
 import TaskRouter from "./routes/task.route";
-import {TaskService} from "./services/task.service";
-import {TaskRepository} from "./repositories/task.repository";
-import TaskController from "./controllers/task.controller";
+import { taskController } from "./container/container";
 
 const app = express();
 const port = process.env.PORT || 3001;
 
-const taskRepository = new TaskRepository();
-const taskService = new TaskService(taskRepository);
-const taskController = new TaskController(taskService);
+const swaggerOptions = {
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Task API",
+      version: "1.0.0",
+      description: "API to manage tasks"
+    },
+    servers: [
+      {
+        url: "http://localhost:3001",
+        description: "Local server"
+      }
+    ]
+  },
+  apis: ["./src/routes/**/*.ts"],
+};
 
-app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
 
-app.use(express.urlencoded({extended: true}));
+app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/task", TaskRouter(taskController));
 
-app.get("/", (req: Request, res: Response) => {
-  res.json({message: "API Rest de Gerenciamento de Tarefas!"});
+app.get("/", (req, res) => {
+  res.json({ message: "Rest API to manage tasks!" });
 });
 
 export default app;
