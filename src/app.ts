@@ -1,10 +1,10 @@
-import express from "express";
+import express, {Application} from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
 import TaskRouter from "./routes/task.route";
-import { taskController } from "./container/container";
+import {taskController} from "./container/container";
 
-const app = express();
+const app: Application = express();
 const port = process.env.PORT || 3001;
 
 const swaggerOptions = {
@@ -22,20 +22,20 @@ const swaggerOptions = {
       }
     ]
   },
-  apis: ["./src/routes/**/*.ts"],
+  apis: ["./src/routes/**/*.ts"]
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
 
 app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 app.use("/task", TaskRouter(taskController));
 
 app.get("/", (req, res) => {
-  res.json({ message: "Rest API to manage tasks!" });
+  res.json({message: "Rest API to manage tasks!"});
 });
 
 export default app;
