@@ -1,6 +1,13 @@
-import {describe, expect, it, jest} from "@jest/globals";
+import {describe, expect, it, jest, beforeAll, afterAll} from "@jest/globals";
 import request from "supertest";
 import app from "../../src/app";
+import {TaskRepository} from "../../src/repositories/task.repository";
+
+jest.mock("../../src/repositories/task.repository");
+
+const mockTaskRepository = TaskRepository as jest.MockedClass<
+  typeof TaskRepository
+>;
 
 let server: any;
 
@@ -28,6 +35,8 @@ describe("Task API", () => {
       updatedAt: new Date()
     };
 
+    mockTaskRepository.prototype.create.mockResolvedValue(mockCreatedTask);
+
     const response = await request(server).post("/task").send(newTask);
 
     expect(response.status).toBe(201);
@@ -48,6 +57,9 @@ describe("Task API", () => {
         updatedAt: new Date()
       }
     ];
+
+    mockTaskRepository.prototype.findAll.mockResolvedValue(mockTasks);
+
     const response = await request(server).get("/task");
 
     expect(response.status).toBe(200);
