@@ -19,6 +19,10 @@ const swaggerOptions = {
       {
         url: "http://localhost:3001",
         description: "Local server"
+      },
+      {
+        url: "https://taskmanagementsystem-z9kk.onrender.com/",
+        description: "Render Deploy"
       }
     ]
   },

@@ -1,8 +1,10 @@
+import {ObjectId} from "mongodb";
+
 export class Task {
-  id: string;
-  title: string;
-  description: string;
-  completed: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  id: string | ObjectId = "";
+  title: string = "";
+  description: string | null = "" ;
+  completed: boolean = false;
+  createdAt: Date = new Date();
+  updatedAt: Date = new Date();
 }

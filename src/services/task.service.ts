@@ -5,7 +5,7 @@ import {ITaskService} from "../interfaces/task.service.interface";
 export class TaskService implements ITaskService {
   constructor(private readonly repository: ITaskRepository) {}
 
-  async createTask(data): Promise<Task> {
+  async createTask(data: Task): Promise<Task> {
     return this.repository.create(data);
   }
 
