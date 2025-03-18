@@ -1,7 +1,11 @@
-import "dotenv/config";
-import app from "./app";
+import 'dotenv/config';
+import app from './app';
 
-
-    app.listen(3001, () => {
-      console.log("Server running on port 3001");
-  });
+app.listen(
+	3001,
+	() => {
+		console.log(
+			'Server running on port 3001'
+		);
+	}
+);

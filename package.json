@@ -1,36 +1,31 @@
 {
-   "name": "TaskManagementSystem",
-   "version": "1.0.0",
-   "main": "index.js",
-   "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "dev": "nodemon src/server.ts",
-      "build": "npx tsc",
-      "start": "ts-node src/server.ts",
-      "typeorm": "typeorm-ts-node-commonjs"
-   },
-   "keywords": [],
-   "author": "Pedro Lyrio (Plyrio Dev)",
-   "license": "MIT",
-   "description": "This is a system to management task with basics services",
-   "dependencies": {
-      "@prisma/client": "^6.2.1",
-      "dotenv": "^16.4.7",
-      "express": "^4.17.2",
-      "mongodb": "^5.2.0",
-      "reflect-metadata": "^0.1.13",
-      "swagger-jsdoc": "^6.2.8",
-      "swagger-ui": "^5.18.2",
-      "swagger-ui-express": "^5.0.1",
-      "typeorm": "0.3.20"
-   },
-   "devDependencies": {
-      "@types/express": "^5.0.0",
-      "@types/node": "^16.11.10",
-      "nodemon": "^3.1.9",
-      "prisma": "^6.2.1",
-      "ts-node": "10.9.1",
-      "tsx": "^4.19.2",
-      "typescript": "4.5.2"
-   }
+	"name": "TaskManagementSystem",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"dev": "tsx watch src/server.ts",
+		"build": "tsc --outDir dist --declaration",
+		"start": "node dist/server.js"
+	},
+	"keywords": [],
+	"author": "Pedro Lyrio (Plyrio Dev)",
+	"license": "MIT",
+	"description": "This is a system to management task with basics services",
+	"dependencies": {
+		"@prisma/client": "^6.2.1",
+		"dotenv": "^16.4.7",
+		"express": "^4.17.2",
+		"mongodb": "^5.2.0",
+		"swagger-jsdoc": "^6.2.8",
+		"swagger-ui": "^5.18.2",
+		"swagger-ui-express": "^5.0.1"
+	},
+	"devDependencies": {
+		"@types/express": "^5.0.0",
+		"@types/node": "^16.11.10",
+		"prisma": "^6.2.1",
+		"ts-node": "10.9.1",
+		"tsx": "^4.19.2",
+		"typescript": "4.5.2"
+	}
 }
